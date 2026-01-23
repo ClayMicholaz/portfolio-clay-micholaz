@@ -28,9 +28,9 @@ export default function Contact() {
   ];
 
   return (
-    <section className="snap-start bg-white text-gray-900 flex flex-col">
+    <section className="snap-start bg-white text-gray-900 flex flex-col min-h-screen">
       {/* Contact Section */}
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 py-16 sm:px-10">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 sm:px-10">
         <h2 className="text-3xl font-semibold mb-8">Contact Me</h2>
 
         <div className="flex flex-col gap-3 text-base sm:text-lg w-full max-w-xs sm:max-w-sm">
