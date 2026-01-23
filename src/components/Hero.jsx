@@ -1,14 +1,13 @@
 export default function Hero() {
   const handleScroll = () => {
-    const container = document.getElementById("scroll-container"); // your main scrollable div
+    const container = document.getElementById("scroll-container");
     const target = document.getElementById("projects");
     if (container && target) {
-      // Temporarily disable snap to avoid glitches
       container.style.scrollSnapType = "none";
 
       const start = container.scrollTop;
       const end = target.offsetTop;
-      const duration = 500; // in milliseconds
+      const duration = 500;
       let startTime = null;
 
       const easeInOutQuad = (t) =>
@@ -24,7 +23,6 @@ export default function Hero() {
         if (progress < 1) {
           requestAnimationFrame(animate);
         } else {
-          // Re-enable snap after animation
           container.style.scrollSnapType = "y mandatory";
         }
       };
@@ -40,7 +38,7 @@ export default function Hero() {
       <div className="flex flex-col max-w-xl text-center md:text-left">
         <h1 className="text-3xl sm:text-5xl font-bold">Clay Micholaz</h1>
         <p className="mt-4 text-gray-600 text-sm sm:text-base">
-          I’m a 3rd-semester Informatics student pursuing my Bachelor’s degree, passionate about becoming a full-stack developer. I’m constantly learning and improving my skills in the world of technology.
+          I’m a 4th-semester Informatics student pursuing my Bachelor’s degree, passionate about becoming a full-stack developer. I’m constantly learning and improving my skills in the world of technology.
         </p>
         <button
           onClick={handleScroll}

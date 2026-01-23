@@ -19,7 +19,7 @@ export default function Navbar() {
           }
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     sections.forEach((section) => {
@@ -47,7 +47,7 @@ export default function Navbar() {
       </style>
 
       {/* Navbar hidden on small screens, visible on md and up */}
-      <nav className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-6 z-50">
+      <nav className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-50">
         {sections.map((section) => (
           <a
             key={section.id}
@@ -59,7 +59,10 @@ export default function Navbar() {
               const target = document.getElementById(section.id);
 
               if (container && target) {
-                container.style.scrollSnapType = "none";
+                // Disable wheel handler during animation
+                if (window.__setScrollAnimating) {
+                  window.__setScrollAnimating(true);
+                }
 
                 const start = container.scrollTop;
                 const end = target.offsetTop;
@@ -80,7 +83,10 @@ export default function Navbar() {
                   if (progress < 1) {
                     requestAnimationFrame(animate);
                   } else {
-                    container.style.scrollSnapType = "y mandatory";
+                    // Re-enable wheel handler after animation
+                    if (window.__setScrollAnimating) {
+                      window.__setScrollAnimating(false);
+                    }
                   }
                 };
 
@@ -90,13 +96,13 @@ export default function Navbar() {
             className="group relative flex items-center"
           >
             {/* Tooltip */}
-            <span className="absolute right-full mr-4 px-3 py-1 rounded bg-gray-900 text-white text-sm opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+            <span className="absolute right-full mr-3 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 whitespace-nowrap">
               {section.label}
             </span>
 
             {/* Dot */}
             <span
-              className={`w-5 h-5 rounded-full transition-colors duration-200 ${
+              className={`w-4 h-4 rounded-full transition-colors duration-200 ${
                 activeSection === section.id
                   ? "bg-gray-900 animate-droplet"
                   : "bg-gray-400 group-hover:bg-gray-900"

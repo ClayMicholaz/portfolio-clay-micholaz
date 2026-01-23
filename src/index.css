@@ -5,3 +5,49 @@
 html {
   scroll-behavior: smooth;
 }
+
+#scroll-container {
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+  scroll-padding-top: 60px;
+  /* Enable smooth momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+section {
+  scroll-snap-align: none;
+  scroll-snap-stop: avoid;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  #scroll-container,
+  section {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+}
+
+a,
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* GPU acceleration for smoother rendering */
+  will-change: transform;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* Optimize scrolling for mobile */
+@media (max-width: 768px) {
+  #scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
