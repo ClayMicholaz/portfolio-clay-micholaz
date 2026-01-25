@@ -8,15 +8,15 @@ html {
 
 #scroll-container {
   scroll-behavior: smooth;
-  scroll-snap-type: none;
+  scroll-snap-type: y mandatory;
   scroll-padding-top: 60px;
   /* Enable smooth momentum scrolling on iOS */
   -webkit-overflow-scrolling: touch;
 }
 
 section {
-  scroll-snap-align: none;
-  scroll-snap-stop: avoid;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   scroll-behavior: smooth;
 }
 
