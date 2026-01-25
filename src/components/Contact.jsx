@@ -6,7 +6,7 @@ export default function Contact() {
   const handleEmailClick = (e) => {
     e.preventDefault();
     const email = "clay" + "michol" + "az" + "@gm" + "ail.com";
-    window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, "_blank");
   };
 
   const socialLinks = [
@@ -15,21 +15,10 @@ export default function Contact() {
       url: "https://github.com/ClayMicholaz",
       label: "GitHub",
     },
-    {
-      icon: <FaInstagram className="text-lg" />,
-      url: "https://instagram.com/clay.mchlz",
-      label: "Instagram",
-    },
-    {
-      icon: <FaEnvelope className="text-lg" />,
-      url: "#contact",
-      label: "Email",
-    },
   ];
 
   return (
     <section className="snap-start bg-white text-gray-900 flex flex-col min-h-screen">
-      {/* Contact Section */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 sm:px-10">
         <h2 className="text-3xl font-semibold mb-8">Contact Me</h2>
 

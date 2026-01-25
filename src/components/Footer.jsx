@@ -9,16 +9,6 @@ export default function Footer() {
       url: "https://github.com/ClayMicholaz",
       label: "GitHub",
     },
-    {
-      icon: <FaInstagram className="text-lg" />,
-      url: "https://instagram.com/clay.mchlz",
-      label: "Instagram",
-    },
-    {
-      icon: <FaEnvelope className="text-lg" />,
-      url: "#contact",
-      label: "Email",
-    },
   ];
 
   return (
