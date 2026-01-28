@@ -10,8 +10,7 @@ export default function Hero() {
       const duration = 500;
       let startTime = null;
 
-      const easeInOutQuad = (t) =>
-        t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
       const animate = (time) => {
         if (!startTime) startTime = time;
@@ -33,12 +32,18 @@ export default function Hero() {
 
   return (
     <section className="px-6 sm:px-10 h-screen snap-start flex flex-col md:flex-row items-center justify-center bg-white text-gray-900 gap-6 md:gap-10">
-      <img src="profile.jpg" className="w-40 h-40 sm:w-56 sm:h-56 rounded-full object-cover" />
+      <img
+        src="profile.jpg"
+        alt="Clay Micholaz - Full Stack Developer and Informatics Student"
+        className="w-40 h-40 sm:w-56 sm:h-56 rounded-full object-cover"
+      />
 
       <div className="flex flex-col max-w-xl text-center md:text-left">
         <h1 className="text-3xl sm:text-5xl font-bold">Clay Micholaz</h1>
         <p className="mt-4 text-gray-600 text-sm sm:text-base">
-          I’m a 4th-semester Informatics student pursuing my Bachelor’s degree, passionate about becoming a full-stack developer. I’m constantly learning and improving my skills in the world of technology.
+          I’m Clay Micholaz, a 4th-semester Informatics student pursuing my
+          Bachelor’s degree and an aspiring full-stack developer. This is my
+          official portfolio where I showcase my projects and skills.
         </p>
         <button
           onClick={handleScroll}
@@ -48,6 +53,5 @@ export default function Hero() {
         </button>
       </div>
     </section>
-
   );
 }
