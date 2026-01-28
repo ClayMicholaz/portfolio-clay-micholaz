@@ -1,82 +1,151 @@
-import { FaEnvelope, FaWhatsapp, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Contact() {
-  const currentYear = new Date().getFullYear();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleEmailClick = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const email = "clay" + "michol" + "az" + "@gm" + "ail.com";
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, "_blank");
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mzdgpbpk", {
+        method: "POST",
+        body: new FormData(e.target),
+        headers: { Accept: "application/json" },
+      });
+
+      setSubmitStatus(response.ok ? "success" : "error");
+      if (response.ok) {
+        e.target.reset();
+        setTimeout(() => setSubmitStatus(null), 5000);
+      }
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const socialLinks = [
-    {
-      icon: <FaGithub className="text-lg" />,
-      url: "https://github.com/ClayMicholaz",
-      label: "GitHub",
-    },
-  ];
+  const inputClass =
+    "border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900";
 
   return (
-    <section className="snap-start bg-white text-gray-900 flex flex-col min-h-screen">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 sm:px-10">
-        <h2 className="text-3xl font-semibold mb-8">Contact Me</h2>
+    <section className="snap-start bg-white text-gray-900 flex flex-col h-screen">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:py-10 overflow-y-auto">
+        <h2 className="text-3xl font-semibold mb-6">Contact Me</h2>
 
-        <div className="flex flex-col gap-3 text-base sm:text-lg w-full max-w-xs sm:max-w-sm">
-          <a
-            href="#"
-            onClick={handleEmailClick}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 border border-gray-300 rounded-lg px-4 py-3 hover:bg-gray-100 transition shadow-sm"
-          >
-            <FaEnvelope className="text-2xl text-red-500" />
-            Contact via Email
-          </a>
+        <form
+          onSubmit={handleFormSubmit}
+          className="w-full max-w-xs sm:max-w-sm flex flex-col gap-3"
+        >
+          {[
+            {
+              id: "email",
+              type: "email",
+              label: "Your Email",
+              placeholder: "your@email.com",
+            },
+            {
+              id: "name",
+              type: "text",
+              label: "Your Name",
+              placeholder: "John Doe",
+            },
+          ].map(({ id, type, label, placeholder }) => (
+            <div key={id} className="flex flex-col gap-2">
+              <label htmlFor={id} className="font-medium text-sm">
+                {label}
+              </label>
+              <input
+                type={type}
+                name={id}
+                id={id}
+                required
+                placeholder={placeholder}
+                className={inputClass}
+              />
+            </div>
+          ))}
 
-          <a
-            href="https://wa.me/6281385967782"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 border border-gray-300 rounded-lg px-4 py-3 hover:bg-gray-100 transition shadow-sm"
-          >
-            <FaWhatsapp className="text-2xl text-green-500" />
-            Message on WhatsApp
-          </a>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="message" className="font-medium text-sm">
+              Message
+            </label>
+            <textarea
+              name="message"
+              id="message"
+              required
+              placeholder="Your message here..."
+              rows="4"
+              className={`${inputClass} resize-none`}
+            />
+          </div>
 
-          <a
-            href="https://instagram.com/clay.mchlz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 border border-gray-300 rounded-lg px-4 py-3 hover:bg-gray-100 transition shadow-sm"
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-1 px-6 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
-            <FaInstagram className="text-2xl text-pink-500" />
-            @clay.mchlz
-          </a>
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </button>
+
+          {submitStatus && (
+            <p
+              className={`${submitStatus === "success" ? "text-green-600" : "text-red-600"} text-sm text-center font-medium`}
+            >
+              {submitStatus === "success"
+                ? "✓ Message sent! I'll get back to you soon."
+                : "✗ Failed to send. Please try again."}
+            </p>
+          )}
+        </form>
+
+        <div className="mt-6 text-center text-sm text-gray-600">
+          <p>Or connect with me on social media:</p>
+          <div className="flex justify-center gap-4 mt-3">
+            <a
+              href="https://github.com/ClayMicholaz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition"
+              title="GitHub"
+            >
+              <FaGithub className="text-2xl" />
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/clay-micholaz-462a7934b/?originalSubdomain=id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition"
+              title="LinkedIn"
+            >
+              <FaLinkedin className="text-2xl" />
+              LinkedIn
+            </a>
+            <a
+              href="https://instagram.com/clay.mchlz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-pink-500 hover:text-pink-600 transition"
+              title="Instagram"
+            >
+              <FaInstagram className="text-2xl" />
+              Instagram
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Footer Section */}
-      <div className="bg-gray-900 text-white py-6 px-6 sm:px-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400 gap-4">
-            <p>&copy; {currentYear} Clay Micholaz. All rights reserved.</p>
-
-            <div className="flex gap-6">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition text-lg"
-                  title={link.label}
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
-          </div>
+      <div className="bg-gray-900 text-white py-4 px-6 sm:px-10">
+        <div className="max-w-6xl mx-auto flex justify-center items-center text-sm text-gray-400">
+          <p>
+            &copy; {new Date().getFullYear()} Clay Micholaz. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </section>

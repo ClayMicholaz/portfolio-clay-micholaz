@@ -12,21 +12,16 @@ export default function Navbar() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
+      (entries) =>
+        entries.forEach(
+          (entry) => entry.isIntersecting && setActiveSection(entry.target.id),
+        ),
       { threshold: 0.6 },
     );
-
-    sections.forEach((section) => {
-      const el = document.getElementById(section.id);
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, []);
 

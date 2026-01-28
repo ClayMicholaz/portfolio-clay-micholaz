@@ -2,21 +2,32 @@ export default function Hero() {
   const handleScroll = () => {
     const container = document.getElementById("scroll-container");
     const target = document.getElementById("projects");
-    if (!container || !target) return;
+    if (container && target) {
+      container.style.scrollSnapType = "none";
 
-    container.style.scrollSnapType = "none";
-    const start = container.scrollTop;
-    const end = target.offsetTop;
-    let startTime = null;
-    const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+      const start = container.scrollTop;
+      const end = target.offsetTop;
+      const duration = 500;
+      let startTime = null;
 
-    const animate = (time) => {
-      if (!startTime) startTime = time;
-      const progress = Math.min((time - startTime) / 500, 1);
-      container.scrollTop = start + (end - start) * easeInOutQuad(progress);
-      progress < 1 ? requestAnimationFrame(animate) : (container.style.scrollSnapType = "y mandatory");
-    };
-    requestAnimationFrame(animate);
+      const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+
+      const animate = (time) => {
+        if (!startTime) startTime = time;
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        container.scrollTop = start + (end - start) * easeInOutQuad(progress);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          container.style.scrollSnapType = "y mandatory";
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
   };
 
   return (
@@ -30,8 +41,8 @@ export default function Hero() {
       <div className="flex flex-col max-w-xl text-center md:text-left">
         <h1 className="text-3xl sm:text-5xl font-bold">Clay Micholaz</h1>
         <p className="mt-4 text-gray-600 text-sm sm:text-base">
-          I'm Clay Micholaz, a 4th-semester Informatics student pursuing my
-          Bachelor's degree and an aspiring full-stack developer. This is my
+          I’m Clay Micholaz, a 4th-semester Informatics student pursuing my
+          Bachelor’s degree and an aspiring full-stack developer. This is my
           official portfolio where I showcase my projects and skills.
         </p>
         <button
