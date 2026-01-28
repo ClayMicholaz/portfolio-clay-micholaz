@@ -15,8 +15,14 @@ export default function Projects() {
         "An educational video platform developed during full-stack bootcamp. Features content management, user roles, video streaming, and responsive design built with modern web technologies.",
     },
     {
-      title: "third project",
-      description: "coming soon",
+      url: "https://github.com/ClayMicholaz/tictactoe-minimax",
+      title: "TicTacToe AI with Minimax",
+      description:
+        "An intelligent TicTacToe game implementing the Minimax algorithm for unbeatable AI gameplay. Demonstrates advanced game theory concepts and algorithmic problem-solving in a classic strategy game.",
+    },
+    {
+      title: "Fourth Project",
+      description: "Coming soon",
     },
   ];
 
