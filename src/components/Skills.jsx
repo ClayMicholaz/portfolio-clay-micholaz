@@ -85,7 +85,23 @@ export default function Skills() {
     <section className="h-screen flex flex-col items-center justify-center snap-start bg-gray-50 text-gray-900 px-6 overflow-hidden">
       <h2 className="text-3xl font-semibold mb-6">Techs That I Use</h2>
       <div className="w-full max-w-5xl overflow-hidden">
-        <ul className="skills-carousel flex gap-4 sm:gap-6">
+        <ul className="grid grid-cols-3 gap-3 sm:hidden">
+          {skills.map(({ Icon, color, label, link }) => (
+            <li key={label} className="w-full">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white shadow rounded px-2 py-3 flex flex-col items-center hover:shadow-lg transition text-center"
+              >
+                <Icon className={`${color} text-3xl`} />
+                <span className="mt-1 text-[10px] font-medium">{label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="skills-carousel hidden sm:flex gap-4 sm:gap-6">
           {scrollingSkills.map(({ Icon, color, label, link }, index) => (
             <li key={`${label}-${index}`} className="w-20 sm:w-24 shrink-0">
               <a
