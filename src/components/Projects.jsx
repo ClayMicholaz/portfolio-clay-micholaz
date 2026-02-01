@@ -20,10 +20,6 @@ export default function Projects() {
       description:
         "An intelligent TicTacToe game implementing the Minimax algorithm for unbeatable AI gameplay. Demonstrates advanced game theory concepts and algorithmic problem-solving in a classic strategy game.",
     },
-    {
-      title: "Fourth Project",
-      description: "Coming soon",
-    },
   ];
 
   return (
@@ -31,22 +27,12 @@ export default function Projects() {
       id="projects"
       className="h-screen flex flex-col items-center justify-center snap-start bg-white px-6"
     >
-      <h2 className="text-3xl font-semibold mb-6">Featured Projects</h2>
+      <h2 className="text-3xl font-semibold mb-6">Highlighted Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
         {projects.map((project, i) => {
-          const isComingSoon = !project.url;
           const content = (
             <div className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition">
-              <h3 className="text-xl font-semibold">
-                {isComingSoon ? (
-                  <>
-                    <span className="sm:hidden">Coming soon</span>
-                    <span className="hidden sm:inline">{project.title}</span>
-                  </>
-                ) : (
-                  project.title
-                )}
-              </h3>
+              <h3 className="text-xl font-semibold">{project.title}</h3>
               <p className="text-gray-600 mt-2 hidden sm:block">
                 {project.description}
               </p>
@@ -65,6 +51,10 @@ export default function Projects() {
           );
         })}
       </div>
+      <p className="mt-6 text-sm text-gray-600 text-center max-w-xl">
+        Want to see more? I’m always building—check out my GitHub for the latest
+        projects and updates.
+      </p>
       <a
         href="https://github.com/ClayMicholaz"
         target="_blank"
