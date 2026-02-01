@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.skills-carousel {
+  width: max-content;
+  animation: skills-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+@keyframes skills-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,6 +23,7 @@ html {
   scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
 }

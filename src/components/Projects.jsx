@@ -34,10 +34,22 @@ export default function Projects() {
       <h2 className="text-3xl font-semibold mb-6">Featured Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
         {projects.map((project, i) => {
+          const isComingSoon = !project.url;
           const content = (
             <div className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-lg transition">
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-gray-600 mt-2">{project.description}</p>
+              <h3 className="text-xl font-semibold">
+                {isComingSoon ? (
+                  <>
+                    <span className="sm:hidden">Coming soon</span>
+                    <span className="hidden sm:inline">{project.title}</span>
+                  </>
+                ) : (
+                  project.title
+                )}
+              </h3>
+              <p className="text-gray-600 mt-2 hidden sm:block">
+                {project.description}
+              </p>
             </div>
           );
           return project.url ? (
