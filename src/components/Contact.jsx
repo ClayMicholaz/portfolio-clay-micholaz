@@ -66,6 +66,7 @@ export default function Contact() {
                 required
                 placeholder={placeholder}
                 className={inputClass}
+                style={{ caretColor: "#000" }}
               />
             </div>
           ))}
@@ -81,6 +82,7 @@ export default function Contact() {
               placeholder="Your message here..."
               rows="4"
               className={`${inputClass} resize-none`}
+              style={{ caretColor: "#000" }}
             />
           </div>
 
